@@ -41,8 +41,9 @@ class Monitor:
                     self.logger.info('%s Begin Recoding' % logging_title)
                     time.sleep(self.config['LAZY_TIME'])
                     self.logger.info('%s Start Recoding' % logging_title)
+                    sTime = time.strftime('%y%m%d_%H%M%S')
                     t = Recoder(self.room.get_live_urls()[0], self.config['OUTPUT_DIR'],
-                                '%s %s.%s' % (utils.get_current_time(), self.room.get_room_info()['roomname'],
+                                '%s-%s.%s' % (sTime, self.room.get_room_info()['roomname'],
                                               self.config['OUTPUT_FILE_EXT'])).start_recoding()
                     if t > 30:
                         self.logger.info('%s Recoded Over!\tTime:%s s' % (logging_title, str(round(t))))
