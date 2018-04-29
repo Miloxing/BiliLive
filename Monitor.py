@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 from Live import *
 import utils as utils
 from Recoder import Recoder
-
+import os
 
 # 直播间监听
 class Monitor:
@@ -42,10 +42,12 @@ class Monitor:
                     time.sleep(self.config['LAZY_TIME'])
                     self.logger.info('%s Start Recoding' % logging_title)
                     sTime = time.strftime('%y%m%d_%H%M%S')
+                    sName = '{}-{}.{}'.format(sTime, self.room.get_room_info()['roomname'],
+                                              self.config['OUTPUT_FILE_EXT'])
                     t = Recoder(self.room.get_live_urls()[0], self.config['OUTPUT_DIR'],
-                                '%s-%s.%s' % (sTime, self.room.get_room_info()['roomname'],
-                                              self.config['OUTPUT_FILE_EXT'])).start_recoding()
+                                sName).start_recoding()
                     if t > 30:
+                        os.system('rclone move "/root/b/d/{}" milo:milo/b'.format(sName))
                         self.logger.info('%s Recoded Over!\tTime:%s s' % (logging_title, str(round(t))))
                 else:
                     time.sleep(self.config['POLLING_INTERVAL'])
