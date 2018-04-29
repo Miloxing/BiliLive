@@ -1,10 +1,9 @@
 {
   "ROOM_URLS": [
-    "https://live.bilibili.com/1030",
-    "https://www.panda.tv/6666"
+    "http://www.huomao.com/8952"
   ],
   "POLLING_INTERVAL": 30,
   "LAZY_TIME": 5,
   "OUTPUT_FILE_EXT": "flv",
-  "OUTPUT_DIR": "/Users/chigusa"
+  "OUTPUT_DIR": "/root/b/d"
 }
